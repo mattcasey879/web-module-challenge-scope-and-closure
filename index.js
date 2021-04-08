@@ -83,15 +83,15 @@ Use the finalScore function below to do the following:
 */ 
 
 function finalScore(inningCB,numOfInnings){
-   let scores = {
+   let score = {
      'Home': 0,
      'Away': 0
    }
     for (let i = 0; i < numOfInnings; i++){
-      scores['Home'] += inningCB();
-      scores['Away'] += inningCB();
+      score['Home'] += inningCB();
+      score['Away'] += inningCB();
     }
-    return scores
+    return score
   }
  
   
@@ -113,7 +113,6 @@ function getInningScore(inningCB) {
    
    return scores
 }
-
 
 /* ⚾️⚾️⚾️ Task 5: scoreboard() ⚾️⚾️⚾️
 Use the scoreboard function below to do the following:
@@ -143,7 +142,7 @@ Use the scoreboard function below to do the following:
   TIE example: invoking scoreboard(getInningScore,inning, 9) might return 
   an array of strings like this:
 [
-  "Inning 1: Away 1 - Home 1", 
+  "Inning 1: Away 1 - Home 1",
   "Inning 2: Away 2 - Home 2",
   "Inning 3: Away 1 - Home 0", 
   "Inning 4: Away 1 - Home 2", 
@@ -157,9 +156,23 @@ Use the scoreboard function below to do the following:
   */
 
 function scoreboard(getInningCB,inningCB,numOfInnings) {
+  let scoreAtInning = [];
+  let scores = '';
+  let homeScore = 0, awayScore = 0;
 
+  for (let i = 0; i < numOfInnings; i++){
+    scores = getInningScore(inningCB);
+    scoreAtInning.push(`Inning ${i + 1}: Away ${scores.Away} - Home ${scores.Home}`);
+    homeScore += scores.Home;
+    awayScore += scores.Away;
+  }
+
+  awayScore === homeScore ? scoreAtInning.push(`This game will require extra innings: Away ${awayScore} - ${homeScore}`): scoreAtInning.push(`Final Score: Away ${awayScore} - Home ${homeScore}`);
+
+
+  console.log(scoreAtInning);
+  return scoreAtInning
 }
-
 
 
 
